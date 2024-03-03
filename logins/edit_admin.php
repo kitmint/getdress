@@ -21,13 +21,14 @@
 
                                     
             // Data user
-            if (isset($_SESSION['user_login'])) {
-                $user_id = $_SESSION['user_login'];
-                $stmt = $conn->query("SELECT * FROM users WHERE id = $user_id");
-                $stmt->execute();
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            }
+            // if (isset($_SESSION['user_login'])) {
+            //     $user_id = $_SESSION['user_login'];
+            //     $stmt = $conn->query("SELECT * FROM users WHERE id = $user_id");
+            //     $stmt->execute();
+            //     $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            // }
 
+            // Data Admin
             if (isset($_SESSION['admin_login'])) {
                 $admin_id = $_SESSION['admin_login'];
                 $stmt = $conn->query("SELECT * FROM users WHERE id = $admin_id");
@@ -42,12 +43,13 @@
         <br>
         <input type="text" name="lastname" value="<?php echo $row['lastname']; ?>" placeholder="Enter your lastname...">
         <br>
-        <input type="text" name="email" value="<?php echo $row['email']; ?>" placeholder="Enter your email..." readonly>
+        <input type="text" name="email" value="<?php echo $row['email']; ?>" placeholder="Enter your email...">
         <br>
-        <button type="submit" name="updateBtn">Update Data</button> 
+        <button type="submit" name="updateBtn_admin">Update Data</button> 
         
         <button type="submit" name="homepage">Home Page</button>
         
+
           
         
         </form>
