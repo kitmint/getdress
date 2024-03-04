@@ -9,7 +9,7 @@
         $lastname = $_POST['lastname'];
         // $email = $_POST['email'];
 
-        $query = $conn->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email WHERE id = :id");
+        $query = $conn->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname WHERE id = :id");
         $query->bindParam(':firstname', $firstname);
         $query->bindParam(':lastname', $lastname);
         // $query->bindParam(':email', $email);
