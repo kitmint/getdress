@@ -1,3 +1,21 @@
+<?php
+session_start();
+
+// Check if there's an update message
+if (isset($_SESSION['update_message'])) {
+    $updateMessage = $_SESSION['update_message'];
+
+    // Display a notification based on the update message
+    echo '<div class="alert alert-' . (strpos($updateMessage, 'successful') !== false ? 'success' : 'danger') . '" role="alert">' . $updateMessage . '</div>';
+
+    // Clear the update message session variable
+    unset($_SESSION['update_message']);
+}
+
+
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,21 +32,16 @@
         <h3 class="mt-4">แก้ไขข้อมูลส่วนตัว</h3>
         <hr>
         <form action="edit_db.php" method="POST">
+        
+        
+            
 
         <?php
-            session_start();
+            
             require_once '../config/db.php';
 
                                     
-            // Data user
-            // if (isset($_SESSION['user_login'])) {
-            //     $user_id = $_SESSION['user_login'];
-            //     $stmt = $conn->query("SELECT * FROM users WHERE id = $user_id");
-            //     $stmt->execute();
-            //     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            // }
-
-            // Data Admin
+            // Data user admin
             if (isset($_SESSION['admin_login'])) {
                 $admin_id = $_SESSION['admin_login'];
                 $stmt = $conn->query("SELECT * FROM users WHERE id = $admin_id");
@@ -38,18 +51,20 @@
 
 
         ?>
+        
+
         <input type="hidden" name="userid" value="<?php echo $row['id']; ?>">
         <input type="text" name="firstname" value="<?php echo $row['firstname']; ?>" placeholder="Enter your firstname...">
         <br>
         <input type="text" name="lastname" value="<?php echo $row['lastname']; ?>" placeholder="Enter your lastname...">
         <br>
-        <input type="text" name="email" value="<?php echo $row['email']; ?>" placeholder="Enter your email...">
+        <input type="text" name="email" value="<?php echo $row['email']; ?>" placeholder="Enter your email..." readonly>
+        <br>
+        <input type="text" name="phonenumber" value="<?php echo $row['phonenumber']; ?>" placeholder="Enter your phonenumber..." >
         <br>
         <button type="submit" name="updateBtn_admin">Update Data</button> 
         
-        <button type="submit" name="homepage">Home Page</button>
-        
-
+        <button type="submit" name="myprofile">My Profile</button>
           
         
         </form>
